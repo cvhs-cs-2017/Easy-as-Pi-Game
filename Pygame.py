@@ -2,21 +2,21 @@ import pygame
 import time
 import random
 
-pygame.init()
-
+pygame.init() 
 wind_leng = 800
 wind_high = 600
 
 black = (0,0,0)
 white = (255,255,255)
-green = (0,255,0)
+sky_blue = (135,206,235)
 
 Display = pygame.display.set_mode((wind_leng,wind_high))
-pygame.display.set_caption('The Life of a Robot')
+pygame.display.set_caption('Robot Adventures')
 clock =  pygame.time.Clock()
 
 main_robot = pygame.image.load('MainRobot.png')
-tree = pygame.image.load('Tree.png')
+treepic = pygame.image.load('Tree.png')
+cloudpic = pygame.image.load('Cloud.png')
 
 def ground():
     pygame.draw.rect(Display, (0, 123, 12), [-200,560,1000,50])
@@ -25,7 +25,10 @@ def MainRobot():
     Display.blit(main_robot,(400,480))
 
 def Tree(x):
-    Display.blit(tree,(x,150))
+    Display.blit(treepic,(x,150))
+
+def Cloud(cloudx):
+    Display.blit(cloudpic,(cloudx,40))
 
 def text_objects(text,font,color):
     textSurface = font.render(text, True, color)
@@ -40,9 +43,16 @@ def message_display(text2, font, fsize, sec, tcolor, x, y):
     time.sleep(sec)
 
 def GameLoop():    
-    treex = random.randrange(-200,(wind_leng-200))
-    tree2x = random.randrange(-100,(wind_leng-200))
+    treex = random.randrange(-400,0)
+    tree2x = random.randrange(0,400)
+    tree3x = random.randrange(400,800)
+    tree4x = random.randrange(800,1000)
+    tree5x = random.randrange(-600,-400)
+    cloudx = random.randrange(-400,0)
+    cloud2x = random.randrange(200,250)
+    cloud3x = random.randrange(750,800)
     changex = 0
+    cloudXch = 0
 
     Exit = False
 
@@ -55,19 +65,32 @@ def GameLoop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     changex = 3
+                    cloudXch = 1
                 elif event.key == pygame.K_RIGHT:
                     changex = -3
+                    cloudXch = -1
             if event.type == pygame. KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     changex = 0
+                    cloudXch = 0
 
         treex += changex
         tree2x += changex
-        Display.fill(white)
+        tree3x += changex
+        tree4x += changex
+        tree5x += changex
+        cloudx += cloudXch
+        cloud2x += cloudXch
+        cloud3x += cloudXch
+        
+        Display.fill(sky_blue)
+
         ground()
-        Tree(treex)
-        Tree(tree2x)
+        for tree in [treex,tree2x,tree3x,tree4x,tree5x]:
+            Tree(tree)
         MainRobot()
+        for cloud in [cloudx,cloud2x,cloud3x]:
+            Cloud(cloud)
         
         pygame.display.update()
         clock.tick(60)
