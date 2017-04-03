@@ -2,7 +2,7 @@ import pygame
 import time
 import random
 
-pygame.init() 
+pygame.init()
 wind_leng = 800
 wind_high = 600
 
@@ -17,6 +17,7 @@ clock =  pygame.time.Clock()
 main_robot = pygame.image.load('MainRobot.png')
 treepic = pygame.image.load('Tree.png')
 cloudpic = pygame.image.load('Cloud.png')
+sunpic = pygame.image.load('Sun.png')
 
 def ground():
     pygame.draw.rect(Display, (0, 123, 12), [-200,560,1000,50])
@@ -30,6 +31,9 @@ def Tree(x,y):
 def Cloud(cloudx,cloudy):
     Display.blit(cloudpic,(cloudx,cloudy))
 
+def Sun(sunx):
+    Display.blit(sunpic,(sunx,40))
+
 def text_objects(text,font,color):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
@@ -37,25 +41,39 @@ def text_objects(text,font,color):
 def message_display(text2, font, fsize, sec, tcolor, x, y):
     words = pygame.font.Font(font, fsize)
     TextSurf, TextRect = text_objects(text2, words, tcolor)
-    TextRect.center = (x,y)
+    TextRect.center = ((x),(y))
     Display.blit(TextSurf, TextRect)
     pygame.display.update()
-    time.sleep(sec)
+    clock.tick(sec)
 
-def GameLoop():    
+def game_intro():
+    intro = True
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        Display.fill(white)
+        message_display("A Robot's Purpose","freesansbold.ttf",50,10,black,(wind_leng/2),(wind_high/2))
+
+def GameLoop():
     treex = random.randrange(-400,0)
     tree2x = random.randrange(0,400)
     tree3x = random.randrange(400,800)
     tree4x = random.randrange(800,1000)
     tree5x = random.randrange(-600,-400)
+    tree6x = random.randrange(-900,-600)
+    tree7x = random.randrange(1000, 1400)
     cloud1x = random.randrange(-400,0)
     cloud2x = random.randrange(200,250)
     cloud3x = random.randrange(750,800)
     cloud1y = random.randrange(0,50)
     cloud2y = random.randrange(-50,50)
     cloud3y = random.randrange(-50,70)
+    sunx = random.randrange(0,50)
     treechangex = 0
     cloudXch = 0
+    sunXch = 0
 
     Exit = False
 
@@ -68,39 +86,49 @@ def GameLoop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     treechangex = 3
-                    cloudXch = 1
+                    cloudXch = 0.5
+                    sunXch = 0.1
                 elif event.key == pygame.K_RIGHT:
                     treechangex = -3
-                    cloudXch = -1
+                    cloudXch = -0.5
+                    sunXch = -0.1
             if event.type == pygame. KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     treechangex = 0
                     cloudXch = 0
+                    sunXch = 0
 
         treex += treechangex
         tree2x += treechangex
         tree3x += treechangex
         tree4x += treechangex
         tree5x += treechangex
+        tree6x += treechangex
+        tree7x += treechangex
         cloud1x += cloudXch
         cloud2x += cloudXch
         cloud3x += cloudXch
-        
+        sunx += sunXch
+
         Display.fill(sky_blue)
 
         ground()
+        Sun(sunx)
         Cloud(cloud1x,cloud1y)
         Cloud(cloud2x,cloud2y)
         Cloud(cloud3x,cloud3y)
-        for tree in [tree2x,tree4x,tree5x]:
+        for tree in [tree2x,tree4x,tree5x,tree6x]:
             Tree(tree,150)
         MainRobot()
         Tree(tree3x,300)
         Tree(treex,400)
-        
-        pygame.display.update()
-        clock.tick(60)
+        Tree(tree7x,350)
 
+
+        pygame.display.update()
+        clock.tick(100)
+
+game_intro()
 GameLoop()
 
 pygame.quit()
