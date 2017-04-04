@@ -40,13 +40,35 @@ def text_objects(text,font,color):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
-def message_display(text2, font, fsize, sec, tcolor, x, y):
+def timed_message_display(text2, font, fsize, sec, tcolor, x, y):
     words = pygame.font.Font(font, fsize)
     TextSurf, TextRect = text_objects(text2, words, tcolor)
     TextRect.center = ((x),(y))
     Display.blit(TextSurf, TextRect)
     pygame.display.update()
     clock.tick(sec)
+
+def message_display(text2, font, fsize, tcolor, x, y):
+    words = pygame.font.Font(font, fsize)
+    TextSurf, TextRect = text_objects(text2, words, tcolor)
+    TextRect.center = ((x),(y))
+    Display.blit(TextSurf, TextRect)
+
+def button(msg,x,y,w,h,icol,acol,action = None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    if x+w > mouse[0] > x and y+h > mouse[1] > y:
+        pygame.draw.rect(Display,acol,(x,y,w,h))
+        if click[0] == 1 and action != None:
+            if action == "play":
+                GameLoop()
+            elif action == "quit":
+                pygame.quit()
+                quit()
+    else:
+        pygame.draw.rect(Display,icol,(x,y,w,h))
+            
+    message_display(msg,"freesansbold.ttf",20,black,(x+(w/2)),(y+(h/2)))
 
 def game_intro():
     intro = True
@@ -66,20 +88,12 @@ def game_intro():
         TextRect.center = ((wind_leng/2),(wind_high/2))
         Display.blit(TextSurf,TextRect)
 
-        mouse = pygame.mouse.get_pos()
-        if 250+300 > mouse[0] > 250 and 350+50 > mouse[1] > 350:
-            pygame.draw.rect(Display,dark_button,(250,350,300,50))
-        else:
-            pygame.draw.rect(Display,button_gray,(250,350,300,50))
+        button("Start",250,350,300,50,button_gray,dark_button,"play")
 
-        if 250+300 > mouse[0] > 250 and 420+50 > mouse[1] > 420:
-            pygame.draw.rect(Display,dark_button,(250,420,300,50))
-        else:
-            pygame.draw.rect(Display,button_gray,(250,420,300,50))
-        
+        button("Exit",250,420,300,50,button_gray,dark_button,"quit")
+
         pygame.display.update()
         clock.tick(15)
-
 
 def GameLoop():
     treex = random.randrange(-400,0)
@@ -122,7 +136,7 @@ def GameLoop():
                     treechangex = 0
                     cloudXch = 0
                     sunXch = 0
-
+        
         treex += treechangex
         tree2x += treechangex
         tree3x += treechangex
@@ -158,3 +172,4 @@ GameLoop()
 
 pygame.quit()
 quit()
+
