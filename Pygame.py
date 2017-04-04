@@ -9,6 +9,8 @@ wind_high = 600
 black = (0,0,0)
 white = (255,255,255)
 sky_blue = (135,206,235)
+dark_button = (128,128,128)
+button_gray = (200,200,200)
 
 Display = pygame.display.set_mode((wind_leng,wind_high))
 pygame.display.set_caption('Robot Adventures')
@@ -22,8 +24,8 @@ sunpic = pygame.image.load('Sun.png')
 def ground():
     pygame.draw.rect(Display, (0, 123, 12), [-200,560,1000,50])
 
-def MainRobot():
-    Display.blit(main_robot,(400,500))
+def MainRobot(robx,roby):
+    Display.blit(main_robot,(robx,roby))
 
 def Tree(x,y):
     Display.blit(treepic,(x,y))
@@ -48,13 +50,36 @@ def message_display(text2, font, fsize, sec, tcolor, x, y):
 
 def game_intro():
     intro = True
+    w,h = main_robot.get_size()
+    bigw = w*3
+    bigh = h*3
     while intro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
         Display.fill(white)
-        message_display("A Robot's Purpose","freesansbold.ttf",50,10,black,(wind_leng/2),(wind_high/2))
+        bigMainRobot = pygame.transform.scale(main_robot,(bigw,bigh))
+        Display.blit(bigMainRobot,[250,0])
+        largeText = pygame.font.Font('freesansbold.ttf',50)
+        TextSurf,TextRect = text_objects('A Robot\'s Purpose',largeText,black)
+        TextRect.center = ((wind_leng/2),(wind_high/2))
+        Display.blit(TextSurf,TextRect)
+
+        mouse = pygame.mouse.get_pos()
+        if 250+300 > mouse[0] > 250 and 350+50 > mouse[1] > 350:
+            pygame.draw.rect(Display,dark_button,(250,350,300,50))
+        else:
+            pygame.draw.rect(Display,button_gray,(250,350,300,50))
+
+        if 250+300 > mouse[0] > 250 and 420+50 > mouse[1] > 420:
+            pygame.draw.rect(Display,dark_button,(250,420,300,50))
+        else:
+            pygame.draw.rect(Display,button_gray,(250,420,300,50))
+        
+        pygame.display.update()
+        clock.tick(15)
+
 
 def GameLoop():
     treex = random.randrange(-400,0)
@@ -119,7 +144,7 @@ def GameLoop():
         Cloud(cloud3x,cloud3y)
         for tree in [tree2x,tree4x,tree5x,tree6x]:
             Tree(tree,150)
-        MainRobot()
+        MainRobot(400,500)
         Tree(tree3x,300)
         Tree(treex,400)
         Tree(tree7x,350)
