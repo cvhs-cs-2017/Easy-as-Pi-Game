@@ -202,14 +202,34 @@ def gameloopAI():
         if xballchange < 0 or computery < -25 or computery > 500:
             computerchange = 0
         if xballchange > 0:
-            ballhit = random.randrange(2,13)
-            hitspot = random.randrange(0,80)
-            if (yball+ballhit) > (computery+hitspot):
-                computerchange = 3
-            if (yball+ballhit) < (computery+hitspot):
-                computerchange = -3
+            if player1y <= computery:
+                hitspot = random.randrange(40,88)
+                if (yball+7.5) > (computery+hitspot):
+                    computerchange = 3
+                if (yball+7.5) < (computery+hitspot):
+                    computerchange = -3
+                if (yball+7.5) == (computery+hitspot):
+                    if yballchange > 0:
+                        computerchanage = 3
+                    if yballchange < 0:
+                        computerchange = -3
+                    else:
+                        computerchange = 0
+            elif player1y > computery:
+                hitspot = random.randrange(-8,40)
+                if (yball+7.5) > (computery+hitspot):
+                    computerchange = 3
+                if (yball+7.5) < (computery+hitspot):
+                    computerchange = -3
+                if (yball+7.5) == (computery+hitspot):
+                    if yballchange > 0:
+                        computerchanage = 3
+                    if yballchange < 0:
+                        computerchange = -3
+                    else:
+                        computerchange = 0
             
-        if (xball < 30 and ((player1y-5) < yball < (player1y+9.375))) or (xball > 560 and ((computery-5) < yball < (computery+9.375))):
+        if (xball < 30 and ((player1y-10) < yball < (player1y+9.375))) or (xball > 560 and ((computery-10) < yball < (computery+9.375))):
             xballchange *= -1
             yballchange = -3
             hits += 1
@@ -241,7 +261,7 @@ def gameloopAI():
             xballchange *= -1
             yballchange = 2.5
             hits += 1
-        if (xball < 30 and ((player1y+70.626) < yball < (player1y+85))) or (xball > 560 and ((computery+70.626) < yball < (computery+85))):
+        if (xball < 30 and ((player1y+70.626) < yball < (player1y+90))) or (xball > 560 and ((computery+70.626) < yball < (computery+90))):
             xballchange *= -1
             yballchange = 3
             hits += 1
@@ -250,7 +270,7 @@ def gameloopAI():
                 xballchange += .25
             else:
                 xballchange -= .25
-            target += 5
+            target *=2
         if player1y < 0 or player1y > 525:
             player1change = 0
         for event in pygame.event.get():
