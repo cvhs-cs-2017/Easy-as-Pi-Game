@@ -1,4 +1,4 @@
-import pygame
+import pygame  #initializing pygame and window
 import time
 import random
 pygame.init()
@@ -12,11 +12,11 @@ pygame.display.set_caption('Pong')
 clock =  pygame.time.Clock()
 xball = 292.5
 
-def quitgame():
+def quitgame():   #function to exit the game
     pygame.quit()
     quit()
 
-def button(msg,x,y,w,h,icol,acol,action = None):
+def button(msg,x,y,w,h,icol,acol,action = None):   #for the buttons in the game
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if x+w > mouse[0] > x and y+h > mouse[1] > y:
@@ -28,7 +28,7 @@ def button(msg,x,y,w,h,icol,acol,action = None):
         pygame.draw.rect(Display,icol,(x,y,w,h))
         message_display(msg,"freesansbold.ttf",25,acol,(x+(w/2)),(y+(h/2)))
 
-def text_objects(text,font,color):
+def text_objects(text,font,color):    #displaying text to the screen
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 def message_display(text2, font, fsize, tcolor, x, y):
@@ -37,14 +37,14 @@ def message_display(text2, font, fsize, tcolor, x, y):
     TextRect.center = ((x),(y))
     Display.blit(TextSurf, TextRect)
 
-def player1rect(y1):
+def player1rect(y1):   #drawing the paddles and ball
     pygame.draw.rect(Display, white, [15,y1,17,80])
 def player2rect(y2):
     pygame.draw.rect(Display, white, [575,y2,17,80])
 def ball(ballx,bally):
     pygame.draw.rect(Display, white, [ballx,bally,15,15])
 
-def instructions():
+def instructions():   #instruction page
     instruc = True
     while instruc:
         for event in pygame.event.get():
@@ -65,7 +65,7 @@ def instructions():
         pygame.display.update()
         clock.tick(15)
 
-def intro():
+def intro():   #intro screen
     intr = True
     while intr:
         for event in pygame.event.get():
@@ -81,7 +81,7 @@ def intro():
         pygame.display.update()
         clock.tick(15)
 
-def counter():
+def counter():   #the countdown leading to 2 player mode
     Display.fill(black)
     message_display("3","PongFont.ttf",300,white,300,300)
     pygame.display.update()
@@ -100,7 +100,7 @@ def counter():
     time.sleep(1)
     gameloop()
 
-def counterAI():
+def counterAI():   #the countdown leading to the 1 player mode
     Display.fill(black)
     message_display("3","PongFont.ttf",300,white,300,300)
     pygame.display.update()
@@ -119,7 +119,7 @@ def counterAI():
     time.sleep(1)
     gameloopAI()
 
-def winAI():
+def winAI():   #the win conditions in 1 player mode
     if xball < 0:
         compwin = True
         while compwin:
@@ -150,7 +150,7 @@ def winAI():
             clock.tick(15)
 
 
-def win():
+def win():   #the win conditions in 2 player mode 
     if xball < 0:
         p2win = True
         while p2win:
@@ -180,7 +180,7 @@ def win():
             pygame.display.update()
             clock.tick(15)
 
-def gameloopAI():
+def gameloopAI():   #this function controls the 1 player mode. The AI is in this one.
     global xball
     xball = 292.5
     hits = 0
@@ -199,13 +199,13 @@ def gameloopAI():
             winAI()
         if yball < 0 or yball > 585:
             yballchange *= -1
-        if xballchange < 0 or computery < 1 or computery > 526:
+        if xballchange < 0 or computery < 1 or computery > 526:   #this line all the way to line 243 contols AI movement
             if xballchange < 0:
                 computerchange = 0
             if computery < 1:
-                computerchange = 1
+                computerchange = .5
             if computery > 526:
-                computerchange = -1
+                computerchange = -.5
         if xballchange > 0:
             if player1y <= computery:
                 hitspot = random.randrange(40,85)
@@ -311,7 +311,7 @@ def gameloopAI():
         pygame.display.update()
         clock.tick(100)
     
-def gameloop():
+def gameloop():  #this function controls the 2 player mode. No AI in this one
     global xball
     xball = 292.5
     hits = 0
