@@ -330,39 +330,39 @@ def gameloop():
             yballchange = random.randrange(-4,4)
         if yball < 0 or yball > 585:
             yballchange *= -1
-        if (xball < 30 and ((player1y-5) < yball < (player1y+9.375))) or (xball > 560 and ((player2y-5) < yball < (player2y+9.375))):
+        if (xball < 30 and ((player1y-10) < yball <= (player1y+9.375))) or (xball > 560 and ((player2y-10) < yball <= (player2y+9.375))):
             xballchange *= -1
             yballchange = -3.5
             hits += 1
-        if (xball < 30 and ((player1y+9.3751) < yball < (player1y+18.75))) or (xball > 560 and ((player2y+9.2751) < yball < (player2y+18.75))):
+        if (xball < 30 and ((player1y+9.375) < yball <= (player1y+18.75))) or (xball > 560 and ((player2y+9.375) <= yball < (player2y+18.75))):
             xballchange *= -1
             yballchange = -3
             hits += 1
-        if (xball < 30 and ((player1y+18.751) < yball < (player1y+28.125))) or (xball > 560 and ((player2y+18.751) < yball < (player2y+28.125))):
+        if (xball < 30 and ((player1y+18.75) < yball <= (player1y+28.125))) or (xball > 560 and ((player2y+18.75) < yball <= (player2y+28.125))):
             xballchange *= -1
             yballchange = -2
             hits += 1
-        if (xball < 30 and ((player1y+28.1251) < yball < (player1y+37.5))) or (xball > 560 and ((player2y+28.1251) < yball < (player2y+37.5))):
+        if (xball < 30 and ((player1y+28.125) < yball <= (player1y+37.5))) or (xball > 560 and ((player2y+28.125) < yball <= (player2y+37.5))):
             xballchange *= -1
             yballchange = -1
             hits += 1
-        if (xball < 30 and ((player1y+37.501) < yball < (player1y+42.5))) or (xball > 560 and ((player2y+37.501) < yball < (player2y+42.5))):
+        if (xball < 30 and ((player1y+37.5) < yball <= (player1y+42.5))) or (xball > 560 and ((player2y+37.5) < yball <= (player2y+42.5))):
             xballchange *= -1
             yballchange = 0
             hits += 1
-        if (xball < 30 and ((player1y+42.501) < yball < (player1y+51.875))) or (xball > 560 and ((player2y+42.501) < yball < (player2y+51.875))):
+        if (xball < 30 and ((player1y+42.5) < yball <= (player1y+51.875))) or (xball > 560 and ((player2y+42.5) < yball <= (player2y+51.875))):
             xballchange *= -1
             yballchange = 1
             hits += 1
-        if (xball < 30 and ((player1y+51.876) < yball < (player1y+61.25))) or (xball > 560 and ((player2y+51.876) < yball < (player2y+61.25))):
+        if (xball < 30 and ((player1y+51.875) < yball <= (player1y+61.25))) or (xball > 560 and ((player2y+51.875) < yball <= (player2y+61.25))):
             xballchange *= -1
             yballchange = 2
             hits += 1
-        if (xball < 30 and ((player1y+61.251) < yball < (player1y+70.625))) or (xball > 560 and ((player2y+61.251) < yball < (player2y+70.625))):
+        if (xball < 30 and ((player1y+61.25) < yball <= (player1y+70.625))) or (xball > 560 and ((player2y+61.25) < yball <= (player2y+70.625))):
             xballchange *= -1
             yballchange = 3
             hits += 1
-        if (xball < 30 and ((player1y+70.626) < yball < (player1y+85))) or (xball > 560 and ((player2y+70.626) < yball < (player2y+85))):
+        if (xball < 30 and ((player1y+70.625) < yball <= (player1y+90))) or (xball > 560 and ((player2y+70.625) < yball <= (player2y+90))):
             xballchange *= -1
             yballchange = 3.5
             hits += 1
@@ -402,5 +402,6 @@ def gameloop():
         ball(xball,yball)
         pygame.display.update()
         clock.tick(100)
+
 
 intro()
