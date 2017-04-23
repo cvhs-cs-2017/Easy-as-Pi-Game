@@ -189,7 +189,7 @@ def gameloopAI():
     computery = 300-(75/2)
     yball = 292.5
     xballchange = -3
-    yballchange = random.randrange(-1,1)
+    yballchange = random.randrange(-2,2)
     player1change = 0
     computerchange = 0
     Exit = False
@@ -203,7 +203,7 @@ def gameloopAI():
             computerchange = 0
         if xballchange > 0:
             if player1y <= computery:
-                hitspot = random.randrange(40,88)
+                hitspot = random.randrange(40,85)
                 if (yball+7.5) > (computery+hitspot):
                     computerchange = 3
                 if (yball+7.5) < (computery+hitspot):
@@ -216,7 +216,7 @@ def gameloopAI():
                     else:
                         computerchange = 0
             elif player1y > computery:
-                hitspot = random.randrange(-8,40)
+                hitspot = random.randrange(-5,40)
                 if (yball+7.5) > (computery+hitspot):
                     computerchange = 3
                 if (yball+7.5) < (computery+hitspot):
@@ -229,39 +229,39 @@ def gameloopAI():
                     else:
                         computerchange = 0
             
-        if (xball < 30 and ((player1y-10) < yball < (player1y+9.375))) or (xball > 560 and ((computery-10) < yball < (computery+9.375))):
+        if (xball < 30 and ((player1y-10) <= yball+7.5 <= (player1y+9.375))) or (xball > 560 and ((computery-10) < yball+7.5 <= (computery+9.375))):
             xballchange *= -1
             yballchange = -3
             hits += 1
-        if (xball < 30 and ((player1y+9.3751) < yball < (player1y+18.75))) or (xball > 560 and ((computery+9.2751) < yball < (computery+18.75))):
+        if (xball < 30 and ((player1y+9.375) < yball+7.5 <= (player1y+18.75))) or (xball > 560 and ((computery+9.375) < yball+7.5 <= (computery+18.75))):
             xballchange *= -1
             yballchange = -2.5
             hits += 1
-        if (xball < 30 and ((player1y+18.751) < yball < (player1y+28.125))) or (xball > 560 and ((computery+18.751) < yball < (computery+28.125))):
+        if (xball < 30 and ((player1y+18.75) < yball+7.5 <= (player1y+28.125))) or (xball > 560 and ((computery+18.75) < yball+7.5 <= (computery+28.125))):
             xballchange *= -1
             yballchange = -2
             hits += 1
-        if (xball < 30 and ((player1y+28.1251) < yball < (player1y+37.5))) or (xball > 560 and ((computery+28.1251) < yball < (computery+37.5))):
+        if (xball < 30 and ((player1y+28.125) < yball+7.5 <= (player1y+37.5))) or (xball > 560 and ((computery+28.125) < yball+7.5 <= (computery+37.5))):
             xballchange *= -1
             yballchange = -1
             hits += 1
-        if (xball < 30 and ((player1y+37.501) < yball < (player1y+42.5))) or (xball > 560 and ((computery+37.501) < yball < (computery+42.5))):
+        if (xball < 30 and ((player1y+37.5) < yball+7.5 <= (player1y+42.5))) or (xball > 560 and ((computery+37.5) < yball+7.5 <= (computery+42.5))):
             xballchange *= -1
             yballchange = 0
             hits += 1
-        if (xball < 30 and ((player1y+42.501) < yball < (player1y+51.875))) or (xball > 560 and ((computery+42.501) < yball < (computery+51.875))):
+        if (xball < 30 and ((player1y+42.5) < yball+7.5 <= (player1y+51.875))) or (xball > 560 and ((computery+42.5) < yball+7.5 <= (computery+51.875))):
             xballchange *= -1
             yballchange = 1
             hits += 1
-        if (xball < 30 and ((player1y+51.876) < yball < (player1y+61.25))) or (xball > 560 and ((computery+51.876) < yball < (computery+61.25))):
+        if (xball < 30 and ((player1y+51.875) < yball+7.5 <= (player1y+61.25))) or (xball > 560 and ((computery+51.875) < yball+7.5 <= (computery+61.25))):
             xballchange *= -1
             yballchange = 2
             hits += 1
-        if (xball < 30 and ((player1y+61.251) < yball < (player1y+70.625))) or (xball > 560 and ((computery+61.251) < yball < (computery+70.625))):
+        if (xball < 30 and ((player1y+61.25) < yball+7.5 <= (player1y+70.625))) or (xball > 560 and ((computery+61.25) < yball+7.5 <= (computery+70.625))):
             xballchange *= -1
             yballchange = 2.5
             hits += 1
-        if (xball < 30 and ((player1y+70.626) < yball < (player1y+90))) or (xball > 560 and ((computery+70.626) < yball < (computery+90))):
+        if (xball < 30 and ((player1y+70.625) < yball+7.5 < (player1y+90))) or (xball > 560 and ((computery+70.625) < yball+7.5 < (computery+90))):
             xballchange *= -1
             yballchange = 3
             hits += 1
