@@ -199,33 +199,46 @@ def gameloopAI():
             winAI()
         if yball < 0 or yball > 585:
             yballchange *= -1
-        if xballchange < 0 or computery < -25 or computery > 500:
-            computerchange = 0
+        if xballchange < 0 or computery < 1 or computery > 526:
+            if xballchange < 0:
+                computerchange = 0
+            if computery < 1:
+                computerchange = 1
+            if computery > 526:
+                computerchange = -1
         if xballchange > 0:
             if player1y <= computery:
                 hitspot = random.randrange(40,85)
                 if (yball+7.5) > (computery+hitspot):
-                    computerchange = 3
+                    if not computery < 1 or computery > 526:
+                        computerchange = 3
                 if (yball+7.5) < (computery+hitspot):
-                    computerchange = -3
+                    if not computery < 1 or computery > 526:
+                        computerchange = -3
                 if (yball+7.5) == (computery+hitspot):
                     if yballchange > 0:
-                        computerchanage = 3
+                        if not computery < 1 or computery > 526:
+                            computerchanage = 3
                     if yballchange < 0:
-                        computerchange = -3
+                        if not computery < 1 or computery > 526:
+                            computerchange = -3
                     else:
                         computerchange = 0
             elif player1y > computery:
                 hitspot = random.randrange(-5,40)
                 if (yball+7.5) > (computery+hitspot):
-                    computerchange = 3
+                    if not computery < 1 or computery > 526:
+                        computerchange = 3
                 if (yball+7.5) < (computery+hitspot):
-                    computerchange = -3
+                    if not computery < 1 or computery > 526:
+                        computerchange = -3
                 if (yball+7.5) == (computery+hitspot):
                     if yballchange > 0:
-                        computerchanage = 3
+                        if not computery < 1 or computery > 526:
+                            computerchanage = 3
                     if yballchange < 0:
-                        computerchange = -3
+                        if not computery < 1 or computery > 526:
+                            computerchange = -3
                     else:
                         computerchange = 0
             
