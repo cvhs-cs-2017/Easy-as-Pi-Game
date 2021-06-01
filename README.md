@@ -11,7 +11,7 @@ https://www.youtube.com/watch?v=ujOTNg17LjI&list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r8
 ***Pong***
 
 *Instructions:*
--In the 1 player mode, just press the up and down arrow keys to move the left paddle up and down, respectively
+-In the 1 player mode, just press the up and down arrow keys to move the left paddle up and down, respectively. The computer will control the right paddle. Try to make the computer go one way, and hit the ball the other way!
 
 -In the 2 player mode, the player using the left paddle uses the w and s keys to move the paddle up and down, while the player using       the right paddle presses the up and down arrow keys to move his/her paddle up and down.
 
